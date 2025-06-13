@@ -9,6 +9,7 @@ const Sidebar = () => {
   const { logout, onlineUsers } = useContext(AuthContext);
   const { getUsers, users,selectedUser,setSelectedUser,unseenMsges,setUnseenMsges } = useContext(ChatContext);
 
+  const [showMenu, setShowMenu] = useState(false);
   const [input, setInput] = useState("")
 
   const navigate = useNavigate()
@@ -26,11 +27,13 @@ const Sidebar = () => {
           <img src={assets.logo} alt="logo" className='max-w-10' />
           <div className="relative group">
             <img src={assets.menu_icon} alt="menu" className='max-h-5 cursor-pointer' />
-            <div className='absolute top-full right-0 z-20 w-32 p-5 bg-[#67b6e6] rounded-md border border-black-600 text-gray-100 hidden group-hover:block'>
-              <p onClick={()=>navigate('/profile')} className='cursor-pointer text-sm'>Edit Profile</p>
-              <hr className='my-2 border-t border-gray-950 ' />
-              <p onClick={()=> logout()} className='cursor-pointer text-sm'>Logout</p>
-            </div>
+            {showMenu && (
+              <div className='absolute top-full right-0 z-20 w-32 p-5 bg-[#67b6e6] rounded-md border border-black-600 text-gray-100'>
+                <p onClick={() => navigate('/profile')} className='cursor-pointer text-sm'>Edit Profile</p>
+                <hr className='my-2 border-t border-gray-950' />
+                <p onClick={() => logout()} className='cursor-pointer text-sm'>Logout</p>
+              </div>
+            )}
           </div>
         </div>
 
